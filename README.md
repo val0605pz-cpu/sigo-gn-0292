@@ -22,3 +22,13 @@ Preparación del entorno de desarrollo.
 ## Objetivo
 Crear y configurar el entorno de desarrollo
 para el sistema SIGO-GN.
+## Ejecución del proyecto
+
+Para instalar las dependencias:
+npm install
+
+Para ejecutar el proyecto:
+npm run dev
+
+La aplicación se ejecuta localmente
+en http://localhost:5173/
