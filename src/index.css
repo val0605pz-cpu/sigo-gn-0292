@@ -227,3 +227,32 @@ button:focus-visible {
     transition: none;
   }
 }
+
+/* Información del Dashboard */
+
+.info-sesion {
+  background-color: #f5edff;
+  border: 1px solid #d9bdf5;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.info-sesion h3 {
+  color: #7035a5;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  margin-bottom: 18px;
+}
+
+.info-sesion p {
+  color: #53336d;
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.info-sesion strong {
+  color: #7035a5;
+}
