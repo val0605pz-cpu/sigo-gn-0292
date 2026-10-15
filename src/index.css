@@ -1,104 +1,229 @@
 
+/* Fuente elegante de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ESTILOS GENERALES */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f2f4f8;
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(135deg, #f5efff, #e9dcff, #faf7ff);
+  color: #392452;
 }
 
+/* CONTENEDOR PRINCIPAL */
 .layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* ENCABEZADO */
 .header {
-  background-color: #243b65;
+  background: linear-gradient(135deg, #51247a, #8954c7, #b18ae8);
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 28px 20px;
+  box-shadow: 0 4px 20px rgba(85, 40, 135, 0.2);
 }
 
 .header h1 {
-  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
 }
 
+.header p {
+  font-size: 14px;
+  color: #f2e8ff;
+  letter-spacing: 1px;
+}
+
+/* CONTENIDO CENTRAL */
 .contenido {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 35px 20px;
 }
 
+/* TARJETA DE LOGIN Y DASHBOARD */
 .tarjeta {
-  background-color: white;
-  padding: 30px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 42px 35px;
+  border-radius: 22px;
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 12px #0002;
+  max-width: 430px;
+  border: 1px solid #e9dafa;
+  box-shadow: 0 12px 35px rgba(99, 55, 145, 0.15);
+  animation: aparecer 0.6s ease;
 }
 
 .tarjeta h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #68379b;
   text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
+.tarjeta p {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+/* FORMULARIO */
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
+label {
+  color: #59327d;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* CAMPOS DE TEXTO */
 input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
   width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #dcc7f2;
+  border-radius: 12px;
+  background: #fcfaff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #42235f;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
+input::placeholder {
+  color: #aa95be;
+}
+
+input:focus {
+  border-color: #9958d4;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(153, 88, 212, 0.12);
+}
+
+/* BOTONES ELEGANTES */
 button {
-  background-color: #243b65;
+  width: 100%;
+  background: linear-gradient(135deg, #7035a5, #a66be0);
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 12px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
+  margin-top: 12px;
+  box-shadow: 0 5px 15px rgba(112, 53, 165, 0.25);
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #38588d;
+  background: linear-gradient(135deg, #592487, #8b4bc5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(112, 53, 165, 0.35);
 }
 
+button:active {
+  transform: scale(0.98);
+}
+
+button:focus-visible {
+  outline: 3px solid #d7b5f5;
+  outline-offset: 3px;
+}
+
+/* MENSAJES DE ERROR */
 .error {
-  color: red;
+  color: #c03970;
+  background: #fff0f5;
+  border: 1px solid #f5c2d5;
+  border-radius: 10px;
+  padding: 12px;
   text-align: center;
+  font-size: 13px;
 }
 
+/* PIE DE PAGINA */
 .footer {
-  background-color: #e2e6ee;
+  background: #ede0fa;
+  color: #70458f;
   text-align: center;
-  padding: 15px;
+  padding: 18px;
+  font-size: 13px;
+  border-top: 1px solid #ddc7f0;
 }
 
-/* Diseño para celulares */
+/* ANIMACION DE ENTRADA */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* DISEÑO RESPONSIVO PARA CELULARES */
 @media (max-width: 600px) {
   .header {
-    padding: 15px;
+    padding: 20px 12px;
   }
 
   .header h1 {
-    font-size: 20px;
+    font-size: 21px;
   }
 
-  .tarjeta {
-    padding: 20px;
+  .header p {
+    font-size: 12px;
   }
 
   .contenido {
-    padding: 12px;
+    padding: 20px 14px;
+  }
+
+  .tarjeta {
+    padding: 28px 22px;
+    border-radius: 18px;
+  }
+
+  .tarjeta h2 {
+    font-size: 22px;
+  }
+
+  button {
+    padding: 14px;
+  }
+}
+
+/* ACCESIBILIDAD */
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta {
+    animation: none;
+  }
+
+  button,
+  input {
+    transition: none;
   }
 }
