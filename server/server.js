@@ -71,6 +71,32 @@ app.post("/expedientes", (req, res) => {
     });
 });
 
+ // Buscar expedientes por folio, nombre o descripción
+app.get("/expedientes/buscar", (req, res) => {
+    const texto = (req.query.texto || "").toLowerCase();
+
+    const archivos = fs.readdirSync(carpeta);
+
+    const expedientes = archivos
+        .filter(archivo => archivo.endsWith(".json"))
+        .map(archivo => {
+            const contenido = fs.readFileSync(
+                path.join(carpeta, archivo),
+                "utf8"
+            );
+
+            return JSON.parse(contenido);
+        });
+
+    const resultados = expedientes.filter(expediente =>
+        (expediente.folio || "").toLowerCase().includes(texto) ||
+        (expediente.nombre || "").toLowerCase().includes(texto) ||
+        (expediente.descripcion || "").toLowerCase().includes(texto)
+    );
+
+    res.json(resultados);
+});
+
  // Consultar un expediente por su folio
 app.get("/expedientes/:folio", (req, res) => {
     const folio = req.params.folio;
