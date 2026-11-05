@@ -1,0 +1,12 @@
+{
+  "folio": "EXP-0292-011",
+  "nombre": "Miguel Reyes",
+  "tipo": "Accidente Vial",
+  "zona": "Zona Norte",
+  "fecha": "2026-11-11",
+  "descripcion": "Reporte de accidente vial registrado en zona norte.",
+  "estatus": "En proceso",
+  "prioridad": "Media",
+  "fechaCreacion": "2026-11-11T10:00:00.000Z",
+  "fechaModificacion": "2026-11-11T10:00:00.000Z"
+}

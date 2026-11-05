@@ -4,5 +4,9 @@
   "tipo": "Accidente Vial",
   "zona": "Zona Norte",
   "fecha": "2026-11-04",
-  "descripcion": "Se atendió un accidente vial en la zona norte."
+  "descripcion": "Se atendió un accidente vial en la zona norte.",
+  "estatus": "En proceso",
+  "prioridad": "Media",
+  "fechaCreacion": "2026-11-04T10:00:00.000Z",
+  "fechaModificacion": "2026-11-04T10:00:00.000Z"
 }

@@ -1,0 +1,12 @@
+{
+  "folio": "EXP-0292-001",
+  "nombre": "Valentina Alonso",
+  "tipo": "Accidente Vial",
+  "zona": "Zona Norte",
+  "fecha": "2026-11-01",
+  "descripcion": "Reporte de accidente vial registrado en zona norte.",
+  "estatus": "Abierto",
+  "prioridad": "Alta",
+  "fechaCreacion": "2026-11-01T10:00:00.000Z",
+  "fechaModificacion": "2026-11-01T10:00:00.000Z"
+}

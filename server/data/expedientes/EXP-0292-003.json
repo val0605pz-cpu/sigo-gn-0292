@@ -4,5 +4,9 @@
   "tipo": "Robo a comercio",
   "zona": "Zona Centro",
   "fecha": "2026-11-04",
-  "descripcion": "Se atendió un reporte de robo en un establecimiento comercial.\n"
+  "descripcion": "Se atendió un reporte de robo en un establecimiento comercial.\n",
+  "estatus": "Cerrado",
+  "prioridad": "Baja",
+  "fechaCreacion": "2026-11-04T10:00:00.000Z",
+  "fechaModificacion": "2026-11-04T10:00:00.000Z"
 }

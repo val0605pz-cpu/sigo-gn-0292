@@ -1,0 +1,12 @@
+{
+  "folio": "EXP-0292-008",
+  "nombre": "Camila Sanchez",
+  "tipo": "Emergencia Medica",
+  "zona": "Zona Centro",
+  "fecha": "2026-11-08",
+  "descripcion": "Reporte de emergencia medica registrado en zona centro.",
+  "estatus": "En proceso",
+  "prioridad": "Media",
+  "fechaCreacion": "2026-11-08T10:00:00.000Z",
+  "fechaModificacion": "2026-11-08T10:00:00.000Z"
+}

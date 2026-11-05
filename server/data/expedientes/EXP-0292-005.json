@@ -4,5 +4,9 @@
   "tipo": "Accidente de transito",
   "zona": "Zona Oriente",
   "fecha": "2026-11-04",
-  "descripcion": "Accidente de dos autos"
+  "descripcion": "Accidente de dos autos",
+  "estatus": "En proceso",
+  "prioridad": "Media",
+  "fechaCreacion": "2026-11-04T10:00:00.000Z",
+  "fechaModificacion": "2026-11-04T10:00:00.000Z"
 }

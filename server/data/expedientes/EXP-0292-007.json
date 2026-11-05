@@ -1,0 +1,12 @@
+{
+  "folio": "EXP-0292-007",
+  "nombre": "Diego Morales",
+  "tipo": "Robo",
+  "zona": "Zona Sur",
+  "fecha": "2026-11-07",
+  "descripcion": "Reporte de robo registrado en zona sur.",
+  "estatus": "Abierto",
+  "prioridad": "Alta",
+  "fechaCreacion": "2026-11-07T10:00:00.000Z",
+  "fechaModificacion": "2026-11-07T10:00:00.000Z"
+}

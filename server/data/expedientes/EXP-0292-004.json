@@ -4,5 +4,9 @@
   "tipo": "Alteración del orden",
   "zona": "Zona Centro",
   "fecha": "2026-11-04",
-  "descripcion": "Alteración del orden público"
+  "descripcion": "Alteración del orden público",
+  "estatus": "Abierto",
+  "prioridad": "Alta",
+  "fechaCreacion": "2026-11-04T10:00:00.000Z",
+  "fechaModificacion": "2026-11-04T10:00:00.000Z"
 }

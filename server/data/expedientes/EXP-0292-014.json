@@ -1,0 +1,12 @@
+{
+  "folio": "EXP-0292-014",
+  "nombre": "Lucia Mendoza",
+  "tipo": "Incendio",
+  "zona": "Zona Oriente",
+  "fecha": "2026-11-14",
+  "descripcion": "Reporte de incendio registrado en zona oriente.",
+  "estatus": "En proceso",
+  "prioridad": "Media",
+  "fechaCreacion": "2026-11-14T10:00:00.000Z",
+  "fechaModificacion": "2026-11-14T10:00:00.000Z"
+}

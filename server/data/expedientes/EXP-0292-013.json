@@ -1,0 +1,12 @@
+{
+  "folio": "EXP-0292-013",
+  "nombre": "Emiliano Cruz",
+  "tipo": "Emergencia Medica",
+  "zona": "Zona Centro",
+  "fecha": "2026-11-13",
+  "descripcion": "Reporte de emergencia medica registrado en zona centro.",
+  "estatus": "Abierto",
+  "prioridad": "Alta",
+  "fechaCreacion": "2026-11-13T10:00:00.000Z",
+  "fechaModificacion": "2026-11-13T10:00:00.000Z"
+}
