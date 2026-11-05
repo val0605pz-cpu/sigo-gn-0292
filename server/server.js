@@ -58,7 +58,19 @@ app.post("/expedientes", (req, res) => {
             mensaje: "Este expediente ya existe"
         });
     }
+    // Agregar metadatos al expediente
+const estatusValidos = ["Abierto", "En proceso", "Cerrado"];
+const prioridadesValidas = ["Alta", "Media", "Baja"];
 
+if (!estatusValidos.includes(expediente.estatus) ||
+    !prioridadesValidas.includes(expediente.prioridad)) {
+    return res.status(400).json({
+        mensaje: "Selecciona un estatus y una prioridad válidos"
+    });
+}
+
+expediente.fechaCreacion = new Date().toISOString();
+expediente.fechaModificacion = expediente.fechaCreacion;
     // Guardar el expediente
     fs.writeFileSync(
         archivo,
@@ -152,14 +164,37 @@ app.put("/expedientes/:folio", (req, res) => {
         });
     }
 
+    
+    // Recuperar los datos anteriores del expediente
+    const anterior = JSON.parse(
+        fs.readFileSync(archivo, "utf8")
+    );
+
+    // Validar los nuevos metadatos
+    const estatus = req.body.estatus || anterior.estatus || "Abierto";
+    const prioridad = req.body.prioridad || anterior.prioridad || "Media";
+
+    if (!["Abierto", "En proceso", "Cerrado"].includes(estatus) ||
+        !["Alta", "Media", "Baja"].includes(prioridad)) {
+        return res.status(400).json({
+            mensaje: "Estatus o prioridad no válidos"
+        });
+    }
+
+    // Conservar la fecha de creación y actualizar la modificación
     const expediente = {
         folio,
         nombre,
         tipo,
         zona,
         fecha,
-        descripcion
+        descripcion,
+        estatus,
+        prioridad,
+        fechaCreacion: anterior.fechaCreacion || new Date().toISOString(),
+        fechaModificacion: new Date().toISOString()
     };
+
 
     // Sobrescribir el archivo JSON
     fs.writeFileSync(
