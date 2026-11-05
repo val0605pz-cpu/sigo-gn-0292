@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Dependencias del servidor
+server/node_modules/
+
+# Archivos temporales
+*.log
+
+# Variables privadas
+.env
+server/.env
