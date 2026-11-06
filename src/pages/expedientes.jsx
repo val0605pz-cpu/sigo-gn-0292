@@ -152,13 +152,16 @@ const expedientesPaginados = expedientesOrdenados.slice(
         ? `${API}/${formulario.folio}`
         : API;
 
-      const respuesta = await fetch(url, {
-        method: editando ? "PUT" : "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formulario)
-      });
+      
+const respuesta = await fetch(url, {
+  method: editando ? "PUT" : "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "x-rol": rol
+  },
+  body: JSON.stringify(formulario)
+});
+
 
       const datos = await respuesta.json();
 
@@ -191,9 +194,14 @@ const expedientesPaginados = expedientesOrdenados.slice(
     }
 
     try {
-      const respuesta = await fetch(`${API}/${folio}`, {
-        method: "DELETE"
-      });
+      
+const respuesta = await fetch(`${API}/${folio}`, {
+  method: "DELETE",
+  headers: {
+    "x-rol": rol
+  }
+});
+
 
       const datos = await respuesta.json();
 

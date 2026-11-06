@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Expedientes from "./pages/Expedientes";
+import Permisos from "./pages/Permisos";
 import Layout from "./Components/Layout";
 import RutaProtegida from "./Components/RutaProtegida";
 
@@ -34,6 +35,16 @@ function App() {
             element={
               <RutaProtegida>
                 <Expedientes />
+              </RutaProtegida>
+            }
+          />
+
+          {/* Ruta de permisos: solo Comandante */}
+          <Route
+            path="/permisos"
+            element={
+              <RutaProtegida>
+                <Permisos />
               </RutaProtegida>
             }
           />
