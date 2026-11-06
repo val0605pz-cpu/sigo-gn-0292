@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Expedientes from "./pages/Expedientes";
 import Permisos from "./pages/Permisos";
+import Operativos from "./pages/Operativos";
 import Layout from "./Components/Layout";
 import RutaProtegida from "./Components/RutaProtegida";
 
@@ -12,14 +13,10 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
+          {/* Inicio de sesión */}
+          <Route path="/" element={<Login />} />
 
-          {/* Ruta para iniciar sesión */}
-          <Route
-            path="/"
-            element={<Login />}
-          />
-
-          {/* Ruta protegida del Dashboard */}
+          {/* Dashboard */}
           <Route
             path="/dashboard"
             element={
@@ -29,7 +26,7 @@ function App() {
             }
           />
 
-          {/* Ruta protegida de expedientes */}
+          {/* Expedientes */}
           <Route
             path="/expedientes"
             element={
@@ -39,7 +36,7 @@ function App() {
             }
           />
 
-          {/* Ruta de permisos: solo Comandante */}
+          {/* Permisos */}
           <Route
             path="/permisos"
             element={
@@ -49,6 +46,15 @@ function App() {
             }
           />
 
+          {/* Práctica 06: Operativos */}
+          <Route
+            path="/operativos"
+            element={
+              <RutaProtegida>
+                <Operativos />
+              </RutaProtegida>
+            }
+          />
         </Routes>
       </Layout>
     </BrowserRouter>
