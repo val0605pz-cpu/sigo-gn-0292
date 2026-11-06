@@ -266,6 +266,236 @@ app.delete("/expedientes/:folio", verificarPermiso(1), (req, res) => {
     });
 });
 
+ // ==========================================
+ // PRÁCTICA 06 - GESTOR DE OPERATIVOS
+ // ==========================================
+
+const carpetaOperativos = path.join(__dirname, "data", "operativos");
+
+// Crear la carpeta si todavía no existe
+if (!fs.existsSync(carpetaOperativos)) {
+    fs.mkdirSync(carpetaOperativos, { recursive: true });
+}
+
+// Estados y prioridades permitidos
+const estadosOperativos = [
+    "Nuevo", "Listo", "En ejecución",
+    "Bloqueado", "Terminado"
+];
+
+const prioridadesOperativos = ["Alta", "Media", "Baja"];
+
+// Transiciones válidas entre estados
+const transiciones = {
+    "Nuevo": ["Listo"],
+    "Listo": ["En ejecución"],
+    "En ejecución": ["Bloqueado", "Terminado"],
+    "Bloqueado": ["En ejecución"],
+    "Terminado": []
+};
+
+// Validar la clave personalizada
+function claveValida(clave) {
+    return /^OP-0292-\d{3}$/.test(clave);
+}
+
+// Obtener la ruta del archivo JSON
+function archivoOperativo(clave) {
+    return path.join(carpetaOperativos, clave + ".json");
+}
+
+// GET - Consultar todos los operativos
+app.get("/operativos", (req, res) => {
+    const archivos = fs.readdirSync(carpetaOperativos);
+
+    const operativos = archivos
+        .filter(archivo => archivo.endsWith(".json"))
+        .map(archivo => JSON.parse(
+            fs.readFileSync(
+                path.join(carpetaOperativos, archivo), "utf8"
+            )
+        ));
+
+    res.json(operativos);
+});
+
+// GET - Consultar un operativo por clave
+app.get("/operativos/:clave", (req, res) => {
+    const clave = req.params.clave;
+
+    if (!claveValida(clave)) {
+        return res.status(400).json({ mensaje: "Clave no válida" });
+    }
+
+    const archivo = archivoOperativo(clave);
+
+    if (!fs.existsSync(archivo)) {
+        return res.status(404).json({
+            mensaje: "Operativo no encontrado"
+        });
+    }
+
+    res.json(JSON.parse(fs.readFileSync(archivo, "utf8")));
+});
+
+// POST - Crear un operativo
+app.post("/operativos", verificarPermiso(2), (req, res) => {
+    const { clave, nombre, tipo, unidadAsignada, prioridad } = req.body;
+
+    if (!claveValida(clave)) {
+        return res.status(400).json({
+            mensaje: "La clave debe tener formato OP-0292-001"
+        });
+    }
+
+    if (![nombre, tipo, unidadAsignada, prioridad].every(
+        valor => typeof valor === "string" && valor.trim()
+    )) {
+        return res.status(400).json({
+            mensaje: "Debes llenar todos los campos"
+        });
+    }
+
+    if (!prioridadesOperativos.includes(prioridad)) {
+        return res.status(400).json({
+            mensaje: "Prioridad no válida"
+        });
+    }
+
+    const archivo = archivoOperativo(clave);
+
+    if (fs.existsSync(archivo)) {
+        return res.status(409).json({
+            mensaje: "El operativo ya existe"
+        });
+    }
+
+    const operativo = {
+        clave,
+        nombre,
+        tipo,
+        unidadAsignada,
+        estado: "Nuevo",
+        prioridad,
+        fechaCambioEstado: new Date().toISOString()
+    };
+
+    fs.writeFileSync(archivo, JSON.stringify(operativo, null, 2));
+
+    res.status(201).json({
+        mensaje: "Operativo creado correctamente",
+        operativo
+    });
+});
+
+// PUT - Actualizar datos del operativo
+app.put("/operativos/:clave", verificarPermiso(2), (req, res) => {
+    const clave = req.params.clave;
+
+    if (!claveValida(clave)) {
+        return res.status(400).json({ mensaje: "Clave no válida" });
+    }
+
+    const archivo = archivoOperativo(clave);
+
+    if (!fs.existsSync(archivo)) {
+        return res.status(404).json({
+            mensaje: "Operativo no encontrado"
+        });
+    }
+
+    const { nombre, tipo, unidadAsignada, prioridad } = req.body;
+
+    if (![nombre, tipo, unidadAsignada, prioridad].every(
+        valor => typeof valor === "string" && valor.trim()
+    ) || !prioridadesOperativos.includes(prioridad)) {
+        return res.status(400).json({
+            mensaje: "Datos incompletos o prioridad no válida"
+        });
+    }
+
+    const anterior = JSON.parse(fs.readFileSync(archivo, "utf8"));
+
+    const operativo = {
+        ...anterior,
+        nombre,
+        tipo,
+        unidadAsignada,
+        prioridad
+    };
+
+    fs.writeFileSync(archivo, JSON.stringify(operativo, null, 2));
+
+    res.json({
+        mensaje: "Operativo actualizado correctamente",
+        operativo
+    });
+});
+
+// PATCH - Cambiar únicamente el estado
+app.patch("/operativos/:clave/estado", verificarPermiso(2), (req, res) => {
+    const clave = req.params.clave;
+    const { estado } = req.body;
+
+    if (!claveValida(clave)) {
+        return res.status(400).json({ mensaje: "Clave no válida" });
+    }
+
+    const archivo = archivoOperativo(clave);
+
+    if (!fs.existsSync(archivo)) {
+        return res.status(404).json({
+            mensaje: "Operativo no encontrado"
+        });
+    }
+
+    if (Object.keys(req.body).length !== 1 ||
+        !estadosOperativos.includes(estado)) {
+        return res.status(400).json({
+            mensaje: "Debes enviar únicamente un estado válido"
+        });
+    }
+
+    const operativo = JSON.parse(fs.readFileSync(archivo, "utf8"));
+
+    if (!transiciones[operativo.estado]?.includes(estado)) {
+        return res.status(400).json({
+            mensaje: `No se permite pasar de ${operativo.estado} a ${estado}`
+        });
+    }
+
+    operativo.estado = estado;
+    operativo.fechaCambioEstado = new Date().toISOString();
+
+    fs.writeFileSync(archivo, JSON.stringify(operativo, null, 2));
+
+    res.json({
+        mensaje: "Estado actualizado correctamente",
+        operativo
+    });
+});
+
+// DELETE - Eliminar un operativo
+app.delete("/operativos/:clave", verificarPermiso(1), (req, res) => {
+    const clave = req.params.clave;
+
+    if (!claveValida(clave)) {
+        return res.status(400).json({ mensaje: "Clave no válida" });
+    }
+
+    const archivo = archivoOperativo(clave);
+
+    if (!fs.existsSync(archivo)) {
+        return res.status(404).json({
+            mensaje: "Operativo no encontrado"
+        });
+    }
+
+    fs.unlinkSync(archivo);
+
+    res.json({ mensaje: "Operativo eliminado correctamente" });
+});
+
 // Página principal
 app.get("/", (req, res) => {
     res.send("Servidor SIGO-GN funcionando");
