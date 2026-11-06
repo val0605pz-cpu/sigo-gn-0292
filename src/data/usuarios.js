@@ -4,7 +4,7 @@ export const usuarios = [
     usuario: "admin",
     contraseña: "12345",
     nombre: "Administrador",
-    rol: "Oficial"
+    rol: "Comandante"
   },
   {
     usuario: "valentina",
@@ -16,6 +16,6 @@ export const usuarios = [
     usuario: "oficial",
     contraseña: "abc123",
     nombre: "Oficial de Guardia",
-    rol: "Oficial"
+    rol: "Analista"
   }
 ];
